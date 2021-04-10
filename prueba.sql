@@ -63,8 +63,8 @@ INSERT INTO facturas_productos ( facturas_numero_factura, productos_id, cantidad
 
 --consultas finales de la prueba
 --¿Que cliente realizó la compra más cara?
-SELECT clientes_id FROM facturas ORDER BY precio_total DESC;
+SELECT clientes_id, nombre FROM facturas LEFT JOIN clientes ON facturas.clientes_id = clientes.id ORDER BY precio_total DESC LIMIT 1;
 --¿Que cliente pagó sobre 100 de monto?
 SELECT clientes_id FROM facturas WHERE precio_total > 100 GROUP BY clientes_id ORDER BY clientes_id ASC;
 --¿Cuantos clientes han comprado el producto 6.
-SELECT * FROM facturas INNER JOIN facturas_productos ON facturas_numero_factura = numero_factura ;
+SELECT COUNT(clientes_id) FROM facturas INNER JOIN facturas_productos ON facturas_numero_factura = numero_factura WHERE productos_id = 6;
